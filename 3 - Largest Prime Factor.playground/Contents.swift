@@ -9,41 +9,30 @@
 
 import UIKit
 
-// Returns a dictionary
-func findPrimes(limit: Int) {
+func findLargestPrime(number: Int){
+    var largestPrime : Int = 0
+    var step : Int = 2
+    var num = number
     
-    // Dictionary that holds a number index that has a value boolean value.
-    // True will be a prime, false will not.
-    var numbers: [Int:Bool] = [:]
-    var a = 0
-    var b = 0
-    
-    // Fill our dictionary with data
-    for i in 0..<limit {
-        numbers.updateValue(true, forKey: i+1)
-    }
-    
-    for i in 1..<2 {
-        numbers[i] = false
-    }
-    
-    for i in 2..<numbers.count {
-        if numbers[i] == true {
-            for j in stride(from: 2 , to: numbers.count, by: 1){
-                numbers.updateValue(false, forKey: a*b)
+    while(num > largestPrime){
+        // If our number is divisible by our current step, then divide our number by step and also
+        // if step > largePrime, then assign as our current max.
+        if(num%step == 0){
+            num = num / step
+            
+            if(step > largestPrime){
+                largestPrime = step
             }
-            b += 1
+            
+            step = 2
+        } else {
+            step += 1
         }
-        b = 0
-        a += 1
     }
-//    for i in 0..<numbers.count {
-//        if numbers[i] == true {
-//            print(numbers[i])
-//        }
-//    }
-    print(numbers)
+    
+    print("\(largestPrime)")
 }
 
-findPrimes(limit: 10)
+findLargestPrime(number: 600851475143)
+
 
